@@ -10,7 +10,8 @@
         </header>
         <main class="main">
             <div class="book-form-container">
-                <form action="/find-rooms" method="POST">
+                <form action="/find-rooms" enctype="multipart/form-data">
+                    @csrf
                     <div class="form-group row">
                         <label for="from" class="col-md-4 col-form-label text-md-right">{{ __('From') }}</label>
 
