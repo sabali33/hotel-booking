@@ -17,14 +17,13 @@ class CreateCustomersTable extends Migration
             $table->bigIncrements('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email');
-            $table->string('password');
+            $table->unsignedBigInteger('user_id');
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('country')->nullable();
             $table->string('phone')->nullable();
-            $table->string('fax')->nullable();
+            $table->string('postcode')->nullable();
             $table->timestamps();
         });
     }
