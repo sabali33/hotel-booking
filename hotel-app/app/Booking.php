@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     public function room(){
-    	return $this->belongsTo(Room::class);
+    	return $this->hasMany(Room::class);
     }
     public function customer(){
     	return $this->belongsTo(Customer::class);

@@ -18,4 +18,7 @@ class Room extends Model
     public function customer(){
     	return $this->hasOne(Customer::class);
     }
+    public function bookedOn(){
+        return $this->hasMany(Booking::class);
+    }
 }
