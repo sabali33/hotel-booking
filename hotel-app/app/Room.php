@@ -15,10 +15,10 @@ class Room extends Model
     public function roomCapacity(){
     	return $this->hasOne(RoomCapacity::class);
     }
-    public function customer(){
-    	return $this->hasOne(Customer::class);
-    }
-    public function bookedOn(){
-        return $this->hasMany(Booking::class);
+    /*public function customer(){
+    	return $this->hasMany(Customer::class);
+    }*/
+    public function bookings(){
+        return $this->hasOne(Booking::class);
     }
 }

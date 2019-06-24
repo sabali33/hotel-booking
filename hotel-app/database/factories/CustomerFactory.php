@@ -3,6 +3,7 @@
 /* @var $factory \Illuminate\Database\Eloquent\Factory */
 
 use App\Customer;
+use App\User;
 use Faker\Generator as Faker;
 
 $factory->define(Customer::class, function (Faker $faker) {
@@ -14,7 +15,7 @@ $factory->define(Customer::class, function (Faker $faker) {
         'country' => $faker->country,
         'state' => $faker->state,
         'postcode' => $faker->postcode,
-        'phone' => $faker->phone,
+        'phone' => $faker->phoneNumber,
         'user_id' => $faker->randomDigitNotNull
     ];
 });
