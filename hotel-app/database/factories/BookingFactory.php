@@ -8,14 +8,15 @@ use App\Customer;
 use Faker\Generator as Faker;
 
 $factory->define(Booking::class, function (Faker $faker) {
-	$in = array_rand(range( 1, 7));
-	$out = array_rand(range(1, 5));
-	$max_end = $out+$in;
+	$in = array_rand(array_values(range( 1, 7))) || 2;
+	$out = array_rand(array_values(range(1, 5)));
+	
 	$min_max = $in+1;
+	$max_end = $out+$min_max;
     return [
         'room_id' => function () {
-        	$rooms = range( 1, 4);
-        	//dd(App\Room::find(array_rand($rooms, 1))->id);
+        	$rooms = array_values(range( 1, 4));
+        	
             return array_rand($rooms, 1);
         },
         'customer_id' => function () {

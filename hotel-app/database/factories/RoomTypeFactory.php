@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(RoomType::class, function (Faker $faker) {
     return [
-        'name' =>$faker->unique()->text,
+        'name' =>$faker->unique()->secondaryAddress,
         'description' =>$faker->text,
         'room_id' => $faker->randomDigitNotNull
     ];

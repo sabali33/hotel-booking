@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RoomCapacity extends Model
 {
-    public function room(){
-    	return $this->belongsTo(App\Room::class);
+    public function rooms(){
+    	return $this->hasMany(Room::class);
     }
 }

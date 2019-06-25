@@ -16,14 +16,13 @@ class RoomSeeder extends Seeder
     {
     	
         factory(Room::class, 10)->create()->each(function ($room){
-	        $room->roomType()->save(factory(RoomType::class)->make());
-	        $room->roomCapacity()->save(factory(RoomCapacity::class)->make());
-	        $room->price()->save(factory(PriceManager::class)->make());
+            $range = range(1, 8);
+            $rand = array_rand($range, 1) + 1;
+	        $room->roomType()->associate(RoomType::find($rand));
+	        $room->roomCapacity()->associate(RoomCapacity::find($rand));
+	        $room->price()->save(PriceManager::find($rand));
+            $room->save();
 	    });
-	    /*$this->call([
-	    	RoomType::class,
-	    	RoomCapacity::class,
-	    	PriceManager::class
-	    ]);*/
+	    
     }
 }

@@ -12,7 +12,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class, 10)->create()->each(function ($user){
+        //dd(User::class);
+        factory(User::class, 10)->create()->each(function (User $user){
 	        $user->customer()->save(factory(Customer::class)->make());
 	        
 	        

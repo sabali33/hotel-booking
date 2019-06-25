@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class BookingRoomPivotTable extends Migration
+class CreateRoomRoomCapacityPivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class BookingRoomPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('booking_room', function (Blueprint $table) {
+        Schema::create('room_roomCapacity', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('room_id');
-            $table->unsignedBigInteger('booking_id');
+            $table->unsignedBigInteger('room_capacity_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class BookingRoomPivotTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('booking_room');
+        Schema::dropIfExists('room_roomCapacity');
     }
 }

@@ -15,10 +15,13 @@ class BookingSeeder extends Seeder
     public function run()
     {
         factory(Booking::class, 5)->create()->each(function ($booking){
-        	//dd( factory(Customer::class)->make() );
-        	$booking->customer()->associate(factory(Customer::class)->make());
-	        $booking->customer()->associate(factory(Room::class)->make());
-	        //$booking->save();
+        	$range = range(2, 5);
+            $id = array_rand($range, 1) + 1;
+            //dd(Customer::find($id), $id);
+            $booking->customer()->associate(Customer::find($id)); //
+        	$booking->room()->associate(Room::find($id));
+	        
+	        $booking->save();
 	        
 	    });
     }

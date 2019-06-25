@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use App\Customer;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -16,9 +16,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+       
     ];
-
+    protected $guarded = [];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -39,4 +39,14 @@ class User extends Authenticatable
     public function customer(){
         return $this->hasOne(Customer::class);
     }
+    /*protected static function boot(){
+        parent::boot();
+        static::created( function($user){
+            $user->customer()->create([
+                'first_name' => $user->name,
+                'first_name' => 'test last',
+                //'customer_id' => $user->id
+            ]);
+        });
+    }*/
 }
