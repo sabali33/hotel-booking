@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use DateTime;
 class Room extends Model
 {
+    protected $guarded = [];
     public function price(){
     	return $this->hasOne(PriceManager::class);
     }
@@ -20,42 +21,29 @@ class Room extends Model
             return null;
         }
     	return $this->bookings->map(function($booking){
-            //var_dump($booking->end_date);
+            
             return $this->getBookedDays( $booking->start_date, $booking->end_date );
         });
     }
     public function bookings(){
         return $this->hasMany(Booking::class);
     }
-    protected function getBookedDays($in, $out){
-        if(!$in || !$out){
-            return false;
-        }
-        $inDate = new DateTime($in);
-        $inDay = $inDate->format('d');
-        $outDate = new DateTime($out);
-        $outDay = $outDate->format('d');
-        $bookedDays = [$inDate->format('Y-m-d')];
-
-        foreach( range($inDay, ($outDay - 1)) as $key => $d){
-            
-            $currentDate = $inDate->modify( '+1 day' );
-            
-            $bookedDays[] = $currentDate->format('Y-m-d');
-        }
-        
-        return $bookedDays;
+    public function getBookedDays(){
+        return $this->bookings->getBookedDays();
 
     }
     public function isBooked($inDate){
-        $days = $this->bookedOn()->toArray();
-        $all_days = [];
-        foreach( $days as $daysBooked){
-            foreach( $daysBooked as $day){
-                $all_days[] = $day;
-            }
-        }
-        return in_array($inDate, $all_days);
 
+        $available = $this->bookings->filter( function($booking) use($inDate){
+            dd($booking->getBookedDays()->contains($inDate), $booking->getBookedDays());
+            return $booking->getBookedDays()->contains($inDate);
+        });
+        return $available->isNotEmpty();
+
+    }
+    public function getLastBookedDate(){
+        $days = $this->bookedOn()->toArray();
+        $lastBookings = array_pop($days);
+        return array_pop($lastBookings);
     }
 }
