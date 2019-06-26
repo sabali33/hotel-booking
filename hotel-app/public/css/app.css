@@ -11100,3 +11100,47 @@ a.text-dark:focus {
   }
 }
 
+.rooms-box {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+}
+
+.room {
+  position: relative;
+}
+
+.room-attribute {
+  margin-left: 3rem;
+}
+
+.action-box {
+  position: absolute;
+  right: 0;
+  bottom: 4rem;
+}
+
+.new-room-form-box {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  background: #000;
+  top: 0;
+  padding-top: 5rem;
+  bottom: 0;
+  z-index: 999;
+}
+
+.new-room-form {
+  width: 50%;
+  background: #fff;
+  padding: 5rem;
+  margin: 0 auto;
+  position: relative;
+}
+
+.close-button {
+  right: 1rem;
+  top: 1rem;
+}
+

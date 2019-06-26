@@ -9,6 +9,7 @@
             </div>
         </header>
         <main class="main">
+            
             <div class="book-form-container">
                 <form action="/find-rooms" enctype="multipart/form-data">
                     @csrf
@@ -44,9 +45,9 @@
                         <div class="col-md-6">
                            <!--  <input id="from" type="date" class="form-control @error('from') is-invalid @enderror" name="from" value="{{ old('from') }}" required autocomplete="from" autofocus> -->
                            <select name="room_type" id="room-type" class="orm-control @error('from') is-invalid @enderror">
-                               <option value="standard">Standard</option>
-                               <option value="deluxe">Deluxe</option>
-                               <option value="luxury">Luxury</option>
+                            @foreach($roomTypes as $type)
+                               <option value="{{$type->id}}">{{$type->name}}</option>
+                               @endforeach;
                            </select>
 
                             @error('name')

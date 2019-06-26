@@ -19,3 +19,5 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/find-rooms', "FindRoomController@index");
+Route::get('/rooms', 'RoomController@index');
+Route::post('/new-room', 'RoomController@create');
