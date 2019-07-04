@@ -9,6 +9,7 @@ class Customer extends Model
 	/*protected $fillable = [
        'first_name'
     ];*/
+    protected $guarded = [];
     public function bookings(){
     	return $this->hasOne(Booking::class);
     }
