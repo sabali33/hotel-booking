@@ -7,6 +7,7 @@ use Illuminate\Support\Collection;
 use DateTime;
 class Booking extends Model
 {
+    protected $guarded = [];
     public function room(){
     	return $this->belongsTo(Room::class);
     }
