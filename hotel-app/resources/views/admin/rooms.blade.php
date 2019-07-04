@@ -2,44 +2,27 @@
 
 @section('content')
 <div class="container">
+
     <div class="row">
+
         <div class="col-2">
-            <nav class="navigation py-5">
-                
-                <ul class="nav-list list-group list-unstyled ">
-                    <li class="nav-item list-group-item">
-                        <a href="/settings">Hotel Details</a>
-                        
-                    </li>
-                    <li class="nav-item list-group-item">
-                        <a href="/rooms">Rooms</a>
-                        
-                    </li>
-                    <li class="nav-item list-group-item">
-                        <a href="/room-types">Room Types</a>
-                        
-                    </li>
-                    <li class="nav-item list-group-item">
-                        <a href="/bookings">Bookings</a>
-                        
-                    </li>
-                    <li class="nav-item list-group-item">
-                        <a href="/prices">Room Prices</a>
-                        
-                    </li>
-                </ul>
-            </nav>
+            <admin-nav></admin-nav>
         </div>
         <div class="col-10">
             <div class="justify-content-center">
                 
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 <div class="new-button py-5">
                     
                     <new-room-button></new-room-button> 
                 </div>  
-                <div class="filter-box">
-                    <span>Filter Rooms: </span>
-                    <div class="filters d-flex">
+                <div class="filter-box d-flex">
+                    <span class="mr-3">Filter Rooms: </span>
+                    <div class="filters">
                         <select name="roomType" class="filter-by-rt">
                             <option value=""> Sort By Type</option>
                         @foreach( $roomTypes as $type)
@@ -52,7 +35,8 @@
                     
                 </div>
 
-                <div class="rooms-box d-flex justify-content-between my-5 ">
+                <div class="rooms-box d-flex justify-content-between mb-5 ">
+                    <h1 class="heading"> Rooms </h1>
                     @foreach( $rooms as $room)
                         <div class="room d-inline-flex py-4 justify-content-around">
                             
@@ -72,8 +56,9 @@
                                 <strong>Booking Count: </strong><br>{{ count($room->books)  }}
                             </div>
                             <div class="action-box">
-                                <button class="btn btn-danger">Delete</button>
-                                <button class="btn btn-primary">Edit</button>
+                                <a href="/room/{{$room->id}}" class="btn btn-danger">Delete</a>
+                                {{-- <a href="/room/{{$room->id}}/edit" class="btn btn-primary">Edit</a> --}}
+                                 <edit-button roomId="{{ $room->id }}" key="{{ $room->id}}"></edit-button> 
                             </div>
                             
                         </div>

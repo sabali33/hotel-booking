@@ -2,6 +2,7 @@
     <div class="new-room-form-box" v-if="showForm">
         
         <div class="new-room-form">
+            
             <button class="btn btn-danger position-absolute close-button" @click="toggleForm">close</button>  
             <div class="form-group">
                 <label for="room-name">Room Name</label>
@@ -17,32 +18,25 @@
             <div class="form-group">
                 <label for="room-type">Room Type</label>
                 <select class="form-control" id="room-type" v-model="data.type">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
+                  <option value="">Select Type</option>
+                  <option  v-for="type in options.types" :value="type.id">{{type.name}}</option>
+                  
+                  
                 </select>{{data.type}}
             </div>
             <div class="form-group">
                 <label for="room-price">Room price</label>
-                <select class="form-control" id="room-price" v-model="data.price">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
+                <select class="form-control" id="room-price" v-model="data.price" ref="price">
+                  <option value="">Select Price</option>
+                  <option  v-for="price in options.prices" :value="price.id">{{price.regular_price}}</option>
                 </select>
                 {{data.price}}
             </div>
             <div class="form-group">
                 <label for="room-capacity">Room Capacity</label>
-                <select class="form-control" id="room-capacity" v-model="data.capacity">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
+                <select class="form-control" id="room-capacity" v-model="data.capacity" ref="capacity">
+                  <option value="">Select Capacity</option>
+                  <option  v-for="capacity in options.capacities" :value="capacity.id">{{capacity.name}}</option>
                 </select>
                 {{data.price}}
             </div>
@@ -65,7 +59,7 @@
 <script>
     export default {
         
-        props: ['showForm', 'toggleForm'],
+        props: ['showForm', 'toggleForm', 'rooms', 'roomTypes'],
 
         data: function(){
             
@@ -77,9 +71,38 @@
                     price: '',
                     image: '',
                     capacity: ''
+                },
+                options:{
+                    types: [ ],
+                    capacities: [ ],
+                    prices:[]
                 }
 
             }
+        },
+        mounted(){
+            console.log('changed');
+            this.getAttributes().then(resp =>{
+                if(resp){
+                    resp.forEach((res)=>{
+                        if(res.status == 200 ){
+                            let url = new URL(res.request.responseURL);
+
+                            if(url.pathname == '/api/types'){
+                                
+                                this.options.types = res.data;
+                            }else if(url.pathname == '/api/prices'){
+                                this.options.prices = res.data;
+                            }else if(url.pathname == '/api/capacities'){
+                                this.options.capacities = res.data;
+                            }
+                        }
+                    })
+                }
+            }).catch(err =>{
+                console.log(err);
+            });
+        
         },
         methods:{
             sendData(){
@@ -88,21 +111,44 @@
                 data.set('data', this.data);
                 axios.post('/new-room', this.data).then( resp => {
                     console.log(resp.data);
+                    this.toggleForm();
+                    window.location = resp.data.redirect;
                 }).catch(err =>{
                     console.log(err);
                 })
             },
             getImage(image){
-                
+                console.log('changed');
                 this.data.image = image.target.files;
                 
+            },
+            getAttributes(){
+                let endpoints = [
+                    '/api/types',
+                    '/api/capacities',
+                    '/api/prices'
+                ];
+                const promises = endpoints.map(endpoint =>{
+                    return axios.get(endpoint);
+                })
+                return Promise.all(promises);
+                /*axios.get('/api/types').then( resp =>{
+                    if(resp.status == 200){
+                        this.options.types = resp.data;  
+                        e.target.click();
+                    }
+
+                }).catch( err => {
+                    console.log(err);
+                })*/
             }
         },
         computed:{
             closeModal: function(){
                 
                 this.showModal = !this.showModal;
-            }
+            },
+            
         }
     }
 </script>

@@ -1,17 +1,27 @@
 <template>
     <div>
-        <button class="btn btn-primary" @bind="showForm" @click="toggleForm">Add New Room 1</button>
-        <new-room-form :showForm="showForm" v-if="showForm" :toggleForm="toggleForm"></new-room-form> 
+        <button class="btn btn-primary" @bind="showForm" @click="toggleForm"> Add New{{ label }} </button>
+        <new-room-form 
+        :showForm="showForm" 
+        v-if="showForm" 
+        :toggleForm="toggleForm" 
+        :rooms="rooms"
+        :roomTypes="roomTypes"></new-room-form> 
+        
     </div>
 </template>
 
 <script>
     export default {
-        
+        props: ['label', 'rooms', 'roomTypes'],
+
         data: function(){
             return {
-                showForm: true,
+                showForm: false,
             }
+        },
+        mounted(){
+            console.log(this.roomTypes);
         },
         computed:{
             
