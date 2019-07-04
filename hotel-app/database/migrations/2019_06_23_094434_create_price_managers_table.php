@@ -15,7 +15,7 @@ class CreatePriceManagersTable extends Migration
     {
         Schema::create('price_managers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('room_id');
+            $table->unsignedBigInteger('room_id')->nullable();
             $table->float('regular_price');
             $table->float('dynamic_price')->nullable();
             $table->timestamp('dynamic_price_expire_date')->nullable();

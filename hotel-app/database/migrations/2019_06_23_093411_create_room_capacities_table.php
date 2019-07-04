@@ -17,7 +17,7 @@ class CreateRoomCapacitiesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('description')->nullable();
-            $table->unsignedBigInteger('room_id');
+            $table->unsignedBigInteger('room_id')->nullable();
             $table->timestamps();
         });
     }

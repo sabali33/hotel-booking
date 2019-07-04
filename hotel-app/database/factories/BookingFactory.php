@@ -21,13 +21,13 @@ $factory->define(Booking::class, function (Faker $faker) {
             return $rNumber;
         },
         'customer_id' => function () {
-        	$customers = range( 5, 10);
+        	$customers = range( 1, 10);
             return array_rand($customers, 1);
         },
         'start_date'  => function() use($room, $in, $faker){
             $date = $faker->dateTimeBetween( "+1day", "+{$in}days"  );
             
-            $dayIsBookedAlready = $room->isBooked($date->format('Y-m-d'));
+            $dayIsBookedAlready = $room ? $room->isBooked($date->format('Y-m-d')) : false;
 
             if(!$dayIsBookedAlready){
                 return $date;
