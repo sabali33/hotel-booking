@@ -14,13 +14,26 @@
 	position: relative;
 } 
 .room-attribute{
-	//display: inline-block;
+	width: 30%;
 	margin-left: 3rem;
 }
 .action-box{
 	position: absolute;
 	right: 0;
-	bottom: 4rem;
+	bottom: 0;
+	display: flex;
+}
+.capability .action-box{
+	bottom: unset;
+	top: 0;
+
+	button:last-child{
+		margin-right: 2rem;
+		margin-left: 1rem;
+	}
+}
+.bookings .action-box{
+	bottom: 0;
 }
 .new-room-form-box {
 	position: fixed;
@@ -42,4 +55,36 @@
 .close-button{
 	right: 1rem;
 	top: 1rem;
+}
+.heading{
+	padding-top: 2rem;
+	border-bottom: solid thin #efefef;
+}
+.new-capacity-box{
+	background-color: #fff;
+}
+.attribute-modal {
+	top: 0;
+	left: 0;
+	z-index: 999;
+	background-color: #fff;
+}
+.booking-edit-box{
+	background: #fff;
+	top: 0;
+	left: 0;
+	z-index: 99;
+}
+.hotel-details{
+	flex-direction: column;
+}
+.edit-setting{
+	top: 2rem;
+	right: 0;
+}
+.attribute-item{
+	margin: 2rem 0;
+}
+.label{
+	font-weight: bold;
 }

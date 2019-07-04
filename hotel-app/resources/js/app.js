@@ -5,7 +5,8 @@
  */
 
 require('./bootstrap');
-
+const CustomController = require('./custom-controller');
+CustomController.CustomController().init();
 window.Vue = require('vue');
 
 /**
@@ -22,6 +23,12 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('new-room-form', require('./components/NewRoomForm.vue').default);
 Vue.component('new-room-button', require('./components/NewRoomButton.vue').default);
+Vue.component( 'edit-button', require('./components/EditButton.vue').default );
+Vue.component( 'edit-room-form', require('./components/EditRoomForm.vue').default );
+Vue.component('admin-nav', require('./components/NavComponent.vue').default);
+Vue.component('new-attribute', require('./components/NewAttribute.vue').default);
+Vue.component('new-attribute-form', require('./components/NewAttributeForm.vue').default);
+Vue.component('edit-booking', require('./components/EditBooking.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

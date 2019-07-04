@@ -9,7 +9,11 @@
             </div>
         </header>
         <main class="main">
-            
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
             <div class="book-form-container">
                 <form action="/find-rooms" enctype="multipart/form-data">
                     @csrf
