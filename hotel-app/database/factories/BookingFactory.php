@@ -38,7 +38,7 @@ $factory->define(Booking::class, function (Faker $faker) {
             $lDateTime = new DateTime($lastBookedDate);
             $lDateTime->modify('+1 day');
 
-            return $dateTime->format('Y-m-d');
+            return $lDateTime->format('Y-m-d');
 
             
         },

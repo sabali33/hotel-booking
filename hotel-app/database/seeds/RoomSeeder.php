@@ -20,8 +20,8 @@ class RoomSeeder extends Seeder
             $rand = array_rand($range, 1) + 1;
 	        $room->roomType()->associate(RoomType::find($rand));
 	        $room->roomCapacity()->associate(RoomCapacity::find($rand));
-	        $room->price()->save(PriceManager::find($rand));
-            $room->save();
+	        $room->price()->associate(PriceManager::find($rand));
+            //$room->save();
 	    });
 	    
     }
