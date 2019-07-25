@@ -6,7 +6,7 @@
     <div class="row">
 
         <div class="col-2">
-            <admin-nav></admin-nav>
+            <admin-nav isadmin={{Gate::allows('isAdmin', Room::class)}}></admin-nav>
         </div>
         <div class="col-10">
             <div class="justify-content-center">
@@ -27,14 +27,14 @@
                                {{--  <img src="{{ $room->room_image }}" alt="{{ $room->name }}" class="w-25 h-25"> --}}
                             
                             <div class="room-attribute">
-                                <strong>Room Name: </strong><br>{{ $customer->first_name }} {{ $customer->last_name }}
+                                <strong>Customer Name: </strong><br>{{ $customer->first_name }} {{ $customer->last_name }}
                             </div>
                             
                             <div class="room-attribute">
                                 <strong>Address: </strong><br>{{ $customer->address }}
                             </div>
                             <div class="room-attribute">
-                                <strong>Price: </strong><br>{{ $customer->city }},{{ $customer->country }}
+                                <strong>City: </strong><br>{{ $customer->city }},{{ $customer->country }}
                             </div>
                             <div class="room-attribute">
                                 <strong>Booking Count: </strong><br>{{ count($customer->bookings)  }}

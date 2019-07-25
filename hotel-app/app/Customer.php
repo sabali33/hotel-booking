@@ -11,7 +11,7 @@ class Customer extends Model
     ];*/
     protected $guarded = [];
     public function bookings(){
-    	return $this->hasOne(Booking::class);
+    	return $this->hasMany(Booking::class);
     }
     public function user(){
     	return $this->belongsTo(User::class);

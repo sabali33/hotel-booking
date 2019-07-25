@@ -71,21 +71,35 @@ class CustomerController extends Controller
         }
         
         
-        $created = $user->customer()->save(Customer::create([
+        $customer = $user->customer()->create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'address' => $data['address'],
             'city' => $data['city'],
             'country' => $data['country'],
-            'user_id' => $user->id
-        ]));
+            
+        ]);
         
-        if($created){
+        if($customer){
             //email user a password
             
             Session::flash('status', "Customer {$user->name} has been created!");
             return redirect('/customers');
         }
         
+    }
+    public static function createUserCustomer($data){
+        if(!$data){
+            return null;
+        }
+        try{
+            
+        }catch(\Exception $e){
+            Session::flash('status', 'couldn\'t add this user');
+            return redirect('/new-customer');
+        }
+        
+        //return $customer;
+
     }
 }
