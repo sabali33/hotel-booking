@@ -69,6 +69,11 @@
                         </div>
                         
                     @endforeach
+                    @if($bookings->count() < 1)
+                        <div class="no-bookings my-4">
+                            <i class="nothing">Sorry, you do not have bookings yet</i>
+                        </div>
+                    @endif
                     
                 </div>
                 <div class="pagination-box">
