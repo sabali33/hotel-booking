@@ -6,6 +6,7 @@
 
 require('./bootstrap');
 const CustomController = require('./custom-controller');
+//import {FunctionalCalendar} from 'vue-functional-calendar';
 CustomController.CustomController().init();
 window.Vue = require('vue');
 
@@ -29,6 +30,12 @@ Vue.component('admin-nav', require('./components/NavComponent.vue').default);
 Vue.component('new-attribute', require('./components/NewAttribute.vue').default);
 Vue.component('new-attribute-form', require('./components/NewAttributeForm.vue').default);
 Vue.component('edit-booking', require('./components/EditBooking.vue').default);
+Vue.component('booking-form', require('./components/BookingForm.vue').default);
+Vue.component('new-customer-form', require('./components/NewCustomerForm.vue').default);
+Vue.component('home-calendar', require('./components/BookingCalendar.vue').default);
+Vue.component('room-listing', require('./components/RoomListing.vue').default);
+Vue.component('bookings-calendar-view', require('./components/BookingsCalendarView.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -37,4 +44,5 @@ Vue.component('edit-booking', require('./components/EditBooking.vue').default);
 
 const app = new Vue({
     el: '#app',
+    
 });
