@@ -23,7 +23,7 @@ class CreateRoomsTable extends Migration
             $table->unsignedBigInteger('room_type_id');
             $table->unsignedBigInteger('room_capacity_id');
             $table->string('room_image');
-            $table->unsignedBigInteger('room_price_id');
+            $table->unsignedBigInteger('price_manager_id');
             $table->timestamps();
         });
     }

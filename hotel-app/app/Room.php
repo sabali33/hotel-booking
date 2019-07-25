@@ -8,7 +8,7 @@ class Room extends Model
 {
     protected $guarded = [];
     public function price(){
-    	return $this->hasOne(PriceManager::class);
+    	return $this->belongsTo(PriceManager::class, 'price_manager_id');
     }
     public function roomType(){
     	return $this->belongsTo(RoomType::class);
@@ -29,13 +29,13 @@ class Room extends Model
         return $this->hasMany(Booking::class);
     }
     public function getBookedDays(){
-        return $this->bookings->getBookedDays();
+        return method_exists($this->bookings, 'getBookedDays') ? $this->bookings->getBookedDays() : [];
 
     }
     public function isBooked($inDate){
 
         $available = $this->bookings->filter( function($booking) use($inDate){
-            dd($booking->getBookedDays()->contains($inDate), $booking->getBookedDays());
+            
             return $booking->getBookedDays()->contains($inDate);
         });
         return $available->isNotEmpty();

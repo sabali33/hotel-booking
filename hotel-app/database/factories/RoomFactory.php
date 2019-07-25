@@ -18,7 +18,7 @@ $factory->define(Room::class, function (Faker $faker) {
         'room_capacity_id'=> function () {
             return factory(App\RoomCapacity::class)->create()->id;
         },
-        'room_price_id' => function () {
+        'price_manager_id' => function () {
             return factory(App\PriceManager::class)->create()->id;
         },
         

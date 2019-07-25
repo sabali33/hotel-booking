@@ -21,7 +21,7 @@ class RoomSeeder extends Seeder
 	        $room->roomType()->associate(RoomType::find($rand));
 	        $room->roomCapacity()->associate(RoomCapacity::find($rand));
 	        $room->price()->associate(PriceManager::find($rand));
-            //$room->save();
+            $room->save();
 	    });
 	    
     }

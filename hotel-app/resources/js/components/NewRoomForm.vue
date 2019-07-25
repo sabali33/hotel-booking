@@ -13,7 +13,7 @@
                     aria-describedby="Room" 
                     placeholder="Enter room name"
                     v-model="data.name">
-                    {{data.name}}
+                    
             </div>
             <div class="form-group">
                 <label for="room-type">Room Type</label>
@@ -22,7 +22,7 @@
                   <option  v-for="type in options.types" :value="type.id">{{type.name}}</option>
                   
                   
-                </select>{{data.type}}
+                </select>
             </div>
             <div class="form-group">
                 <label for="room-price">Room price</label>
@@ -30,20 +30,22 @@
                   <option value="">Select Price</option>
                   <option  v-for="price in options.prices" :value="price.id">{{price.regular_price}}</option>
                 </select>
-                {{data.price}}
+                
             </div>
             <div class="form-group">
                 <label for="room-capacity">Room Capacity</label>
                 <select class="form-control" id="room-capacity" v-model="data.capacity" ref="capacity">
                   <option value="">Select Capacity</option>
-                  <option  v-for="capacity in options.capacities" :value="capacity.id">{{capacity.name}}</option>
+                  <option  v-for="capacity in options.capacities" :value="capacity.id"></option>
                 </select>
-                {{data.price}}
+                
             </div>
             <div class="form-group">
                 <label for="room-image">Room Image</label>
                 <input type="file" class="form-control-file" id="room-image"  @change="getImage" >
-                {{data.image}}
+                <div class="image-preview w-100" >
+                    <img :src="data.image" :alt="data.name" ref="Image" class="w-25" />
+                </div>
             </div>
             <div class="row">
                 <div class="col-8 offset-3">
@@ -106,20 +108,30 @@
         },
         methods:{
             sendData(){
-                let data = new FormData();
-                data.append('image', this.data.image);
-                data.set('data', this.data);
+
                 axios.post('/new-room', this.data).then( resp => {
                     console.log(resp.data);
                     this.toggleForm();
                     window.location = resp.data.redirect;
                 }).catch(err =>{
                     console.log(err);
+                    //window.location = '/rooms';
                 })
             },
             getImage(image){
-                console.log('changed');
-                this.data.image = image.target.files;
+                console.log(this.$refs.Image);
+                let file = image.target.files[0];
+                var reader  = new FileReader();
+
+                reader.onload=  () => {
+                    
+                    this.$refs.Image.src = reader.result;
+                    this.data.image = reader.result;
+                }
+
+                if (file) {
+                    reader.readAsDataURL(file);
+                }
                 
             },
             getAttributes(){

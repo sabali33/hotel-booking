@@ -29,7 +29,7 @@
                 }).catch( err =>{
                     console.log(err);
                 })*/
-                console.log(this.showForm);
+                //console.log(this.showForm);
                 this.showForm = !this.showForm;
             }
         }
