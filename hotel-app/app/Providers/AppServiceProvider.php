@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use Illuminate\Support\Facades\Blade;
+use NumberFormatter;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        
+        Blade::directive('formatMoney', function ($expression) {
+            //$fmt = new NumberFormatter( 'en_US', NumberFormatter::CURRENCY );
+            return "<?php echo '$'.number_format($expression, 2); ?>";
+        });
     }
 }
