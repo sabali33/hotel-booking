@@ -9,11 +9,21 @@ use DateTime;
 class FindRoomController extends Controller
 {
     public function index(){
-    	
-    	$roomType = request('room_type');
-    	$in = new DateTime(request('from'));
-    	$out = new DateTime(request('to'));
-    	$rooms = Room::all()->where( 'room_type_id', $roomType);
+    	$data = request()->validate([
+            'room_type' => 'nullable|integer',
+            'start_date' => 'nullable|string',
+            'end_date' => 'nullable|string'
+        ]);
+        
+    	$room_type_id = request('room_type');
+        $today = new DateTime();
+    	$in =  new DateTime(request('start_date'));
+
+    	$out = request('end_date') ? new DateTime(request('end_date')) : $today->modify('+1 Day');
+
+    	$roomType = $room_type_id ? RoomType::find( $room_type_id ) : null;
+        
+        $rooms = $roomType ? $roomType->rooms : Room::all();
 
     	$rooms = $rooms->filter(function($room) use($in, $out) {
     		if(!$room->bookings->count()){
@@ -23,8 +33,12 @@ class FindRoomController extends Controller
             
             return !$daysBooked;
     	});
-
+        $dates = collect([
+            'in' => $in,
+            'out' => $out,
+            'nights' => $out->diff($in),
+        ]);
     	
-    	return $rooms->toJson();
+    	return view('archive', compact('rooms', 'dates'));
     }
 }
