@@ -6,7 +6,7 @@
     <div class="row">
 
         <div class="col-2">
-            <admin-nav></admin-nav>
+            <admin-nav isadmin={{Gate::allows('isAdmin', Room::class)}}></admin-nav>
         </div>
         <div class="col-10">
             <div class="justify-content-center ml-4">

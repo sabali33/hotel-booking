@@ -19,7 +19,7 @@ Auth::routes();
 
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/find-rooms', "FindRoomController@index");
+Route::post('/find-rooms', "FindRoomController@index");
 Route::put('/room/upload', 'RoomController@upload');
 Route::get('/rooms', 'RoomController@index');
 Route::put('/room/{room}/edit', 'RoomController@update');
@@ -45,6 +45,7 @@ Route::get('/room-capacity/{capacity}', 'RoomCapacityController@destroy');
 Route::get('/bookings', 'BookingController@index');
 Route::get('/booking/{booking}', 'BookingController@destroy');
 Route::put('/booking/{booking}/edit', 'BookingController@update');
+Route::post('/new-booking', 'BookingController@create' );
 Route::get('/prices', 'PriceManagerController@index');
 
 Route::get('/api/types', 'RoomTypeController@json' );
@@ -63,3 +64,4 @@ Route::get('/settings', 'SettingsController@show');
 Route::get('/setting/{settings}/edit', 'SettingsController@edit');
 Route::put('/setting/{settings}', 'SettingsController@update');
 
+Route::get('/countries', 'CountriesController@index');
