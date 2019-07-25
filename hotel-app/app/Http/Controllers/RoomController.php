@@ -72,11 +72,20 @@ class RoomController extends Controller
     	return  $room;
     }
     public function destroy( Room $room ){
-        $room->delete();
-        return redirect('rooms')->with('status', array($this, "respond"));
+        $deleted = $room->delete();
+        $room->bookings()->each(function($booking){
+            $booking->delete();
+        });
+        if($deleted){
+            Session::flash('status', "{$room->name} has been deleted");
+        }else{
+            Session::flash('status', "{$room->name} could not be deleted");
+        }
+        
+        return redirect('/rooms');//->with('status', array($this, "respond")) : redirect('/');
     }
     public function respond(){
-        return "{$this->name} has been deleted";
+        return `Room has been deleted`;
     }
     public function update( Room $room ){
         

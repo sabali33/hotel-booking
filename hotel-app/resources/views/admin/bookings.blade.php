@@ -38,16 +38,17 @@
                 <div class="rooms-box d-flex justify-content-between my-5 bookings">
                     <h1 class="heading"> Rooms Bookings </h1>
                     @foreach( $bookings as $booking)
+
                         <div class="room d-inline-flex py-4 justify-content-around ">
                             
                             @if(str_contains($booking->room->room_image, 'http'))
-                                <img src="{{ $booking->room->room_image }}" alt="{{ $booking->room->name }}" class="w-25 h-25">
+                                <img src="{{ $booking->room->room_image ?? 'No name' }}" alt="{{ $booking->room->name ?? 'No name' }}" class="w-25 h-25">
                             @else
-                                <img src="/storage/images/{{ $booking->room->room_image }}" alt="{{ $booking->room->name }}" class="w-25 h-25">
+                                <img src="/storage/images/{{ $booking->room->room_image ?? '' }}" alt="{{ $booking->room->name ?? 'No name'}}" class="w-25 h-25">
                             @endif
                             
                             <div class="room-attribute mb-3">
-                                <strong>Room Name: </strong><br>{{ $booking->room->name }}
+                                <strong>Room Name: </strong><br>{{ $booking->room->name ?? 'No names' }}
                             </div>
                             
                             <div class="room-attribute mb-3">
