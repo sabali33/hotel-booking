@@ -6,7 +6,7 @@
     <div class="row">
 
         <div class="col-2">
-            <admin-nav></admin-nav>
+            <admin-nav isadmin={{Gate::allows('isAdmin', Room::class)}}></admin-nav>
         </div>
         <div class="col-10">
             <div class="justify-content-center">
@@ -16,7 +16,8 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                <div class="new-button py-5">
+                {{$roomTypes}}
+               {{--  <div class="new-button py-5">
                     
                     <new-room-button></new-room-button> 
                 </div>  
@@ -33,7 +34,7 @@
                     </select>
                     </div>
                     
-                </div>
+                </div> --}}
 
                 <div class="rooms-box d-flex justify-content-around my-5 ">
                     <h1 class="heading"> Rooms Types </h1>
@@ -64,43 +65,43 @@
                 </div>
                 <div class="new-capacity-box pt-5 p-3 ">
                  
-                <h2>Add New Type</h2>
-                <form action="/new-room-type" method="POST">
-                    @csrf
-                    <div class="form-group row">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                    <h2>Add New Type</h2>
+                    <form action="/new-room-type" method="POST">
+                        @csrf
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
-                        <div class="col-md-6">
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+                        <div class="form-group row">
+                            <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
 
-                        <div class="col-md-6">
-                            <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required autocomplete="description" autofocus>
+                            <div class="col-md-6">
+                                <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required autocomplete="description" autofocus>
 
-                            @error('description')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                                @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-8 offset-2">
-                             <button class="btn btn-primary">Add New Type</button>
+                        <div class="form-group row">
+                            <div class="col-8 offset-2">
+                                 <button class="btn btn-primary">Add New Type</button>
+                            </div>
+                           
                         </div>
-                       
-                    </div>
-                </form>
-            </div
+                    </form>
+                </div
             </div>
         </div>
         
