@@ -8,15 +8,16 @@ use Illuminate\Support\Facades\Session;
 class RoomTypeController extends Controller
 {
     public function index(){
+    	//$roomTypes = RoomType::where('rooms')->paginate(10);
     	$roomTypes = RoomType::paginate(10);
-    	
-    
+        
     	return view('admin.room-types', compact( 'roomTypes') );
     }
     public function json(){
     	return RoomType::all();
     }
     public function create(){
+        $this->authorize('update', RoomType::class);
     	$data = request()->validate([
     		'name' => ['required', 'string'],
     		'description' => ['required', 'string']
@@ -28,6 +29,7 @@ class RoomTypeController extends Controller
     	return redirect('room-types');
     }
     public function destroy(RoomType $type){
+        $this->authorize('delete', $type);
     	$deleted = $type->delete();
     	$resp = [
     		'success' => $deleted,
