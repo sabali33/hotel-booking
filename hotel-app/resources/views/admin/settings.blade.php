@@ -20,7 +20,11 @@
                     <h1 class="heading">Hotel details</h1>
                     <div class="attribute-item d-flex">
                         <span class="label w-50">Hotel Image</span>
-                        <img src="/storage/{{$settings->image}}" alt="Hotel name" class="w-50 h-50">
+                        @if(str_contains($settings->image, 'http'))
+                            <img src="{{$settings->image}}" alt="Hotel name" class="w-50 h-50">
+                        @else
+                            <img src="/storage/{{$settings->image}}" alt="Hotel name" class="w-50 h-50">
+                        @endif
 
                     </div>
                     <div class="attribute-item d-flex">
