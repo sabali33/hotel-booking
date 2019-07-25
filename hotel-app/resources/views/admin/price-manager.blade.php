@@ -7,11 +7,11 @@
 
         <div class="col-2">
             
-            <admin-nav></admin-nav>
+            <admin-nav isadmin={{Gate::allows('isAdmin', Room::class)}} ></admin-nav>
         </div>
         <div class="col-10">
             <div class="justify-content-center">
-                {{Session::flash('lkr', 'welcome')}}
+                
                 @if (session('status'))
                     <div class="alert alert-success">
                         {{ session('status') }}
@@ -20,27 +20,29 @@
 
                 <div class="rooms-box d-flex justify-content-between my-5 ">
                     <h1 class="heading pt-0"> Price Manager </h1>
-                    @foreach( $prices as $price)
+
+                    @foreach($prices as $price)
+
                         <div class="room d-inline-flex py-4 justify-content-around">
-                            @if($price->room)
-                            <img src="{{ $price->room->room_image }}" alt="{{ $price->room->name }}" class="w-25 h-25">
+                            @if($price->rooms)
+                            <img src="{{ $price->room->room_image ?? ''}}" alt="{{ $price->room->name ?? '' }}" class="w-25 h-25">
                             
                             <div class="room-attribute">
-                                <strong>Room Name: </strong><br>{{ $price->room->name }}
+                                <strong>Room Count: </strong><br>{{ $price->rooms->count()}}
                             </div>
                             @endif
                             <div class="room-attribute">
-                                <strong>Dynamic Price </strong><br>{{ $price->dynamic_price }}
+                                <strong>Dynamic Price </strong><br>@formatMoney( ( $price->dynamic_price ?? 0 ))
                             </div>
                             <div class="room-attribute">
-                                <strong>Regular Price: </strong><br>{{ $price->regular_price ?? 0 }}
+                                <strong>Regular Price: </strong><br>@formatMoney(($price->regular_price ?? 0))
                             </div>
                             <div class="room-attribute">
                                 <strong>Dynamic expires on: </strong><br>{{ $price->dynamic_price_expire_date  }}
                             </div>
                             <div class="action-box">
-                                <button class="btn btn-danger deletePrice" data-priceid="{{$price->id}}">Delete</button>
-                                <a href="/price/edit/{{ $price->id}}" class="btn btn-primary ml-2">Edit</a>
+                                <button class="btn btn-danger deletePrice" data-priceid="{{$price->id ?? 0}}">Delete</button>
+                                <a href="/price/edit/{{ $price->id ?? 0}}" class="btn btn-primary ml-2">Edit</a>
                             </div>
                             
                         </div>

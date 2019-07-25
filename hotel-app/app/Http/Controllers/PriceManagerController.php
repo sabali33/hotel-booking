@@ -12,7 +12,7 @@ class PriceManagerController extends Controller
     public function index(){
     	
     	$prices = PriceManager::paginate(5);
-    
+        //dd($prices);
     	return view('admin.price-manager', compact('prices') );
     }
     public function json(){
