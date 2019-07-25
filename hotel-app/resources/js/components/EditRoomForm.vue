@@ -15,7 +15,7 @@
                         aria-describedby="Room" 
                         placeholder="Enter room name"
                         v-model="data.name">
-                        {{data.name}}
+                        
                 </div>
                 <div class="form-group">
                     <label for="room-type">Room Type</label>
@@ -24,15 +24,15 @@
                       <option  v-for="type in options.types" :value="type.id" :selected="type==data.type">{{type.name}}</option>
                       
                       
-                    </select>{{data.type}}
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="room-price">Room price</label>
                     <select class="form-control" id="room-price" v-model="data.price" ref="price">
                       <option value="">Select Price</option>
-                      <option  v-for="price in options.prices" :value="price.id" :selected="price==data.price">{{price.regular_price}}</option>
+                      <option  v-for="price in options.prices" :value="price.id" :selected="price.id==room.price_manager_id">{{price.regular_price}} </option>
                     </select>
-                    {{data.price}}
+                    
                 </div>
                 <div class="form-group">
                     <label for="room-capacity">Room Capacity</label>
@@ -40,12 +40,14 @@
                       <option value="">Select Capacity</option>
                       <option  v-for="capacity in options.capacities" :value="capacity.id" :selected="capacity==data.capacity">{{capacity.name}}</option>
                     </select>
-                    {{data.price}}
+                    
                 </div>
                 <div class="form-group">
                     <label for="room-image">Room Image</label>
                     <input type="file" class="form-control-file" id="room-image"  @change="getImage" ref="files" >
-                    {{data.image}}
+                    <div class="image-preview">
+                        <img :src="data.image" :alt="data.name" class="w-25">
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-8 offset-3">
@@ -85,7 +87,7 @@
             }
         },
         mounted(){
-            //console.log(jQuery);
+            
             this.getAttributes().then(resp =>{
                 if(resp){
                     resp.forEach((res)=>{
@@ -101,34 +103,39 @@
                                 this.options.capacities = res.data;
                             }
                         }
+                        
                     })
                 }
             }).catch(err =>{
                 console.log(err);
             });
 
-            this.loadRoom();
+            this.roomParsed = JSON.parse(this.room);
+            this.data = {
+                name: this.roomParsed.name,
+                type: this.roomParsed.room_type_id,
+                capacity: this.roomParsed.room_capacity_id,
+                price: this.roomParsed.price_manager_id,
+                image: this.roomParsed.room_image
+            };
+            //
         
         },
         methods:{
             sendData(){
-                let data = new FormData();
-
-                data.append('roomImage', this.data.image, this.data.image.name);
-                data.append('_method', 'PUT');
-                //console.log(data.get('image'));
-                axios.post(`/room/upload`, data
+                
+                axios.put(`/room/${this.roomParsed.id}/edit`, this.data
                     ).then( resp => {
                     console.log(resp);
                     
-                    //this.toggleForm();
-                    //window.location = resp.data.redirect;
+                    this.toggleForm();
+                    window.location = resp.data.redirect;
                 }).catch(err =>{
                     console.log(err);
                 })
             },
             getImage(image){
-                console.log(this.$refs.files.files[0]);
+                
                 this.data.image = this.$refs.files.files[0];
                 
             },
@@ -162,6 +169,12 @@
                     console.log(err);
                 })
             },
+            isSelected(value, data){
+                if(!value || !data){
+                    return false;
+                }
+                return data.includes(value);
+            }
 
         },
         
