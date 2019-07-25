@@ -33,9 +33,7 @@ class BookingController extends Controller
             );
             //return $booking->getBookedDays();
         });
-        //$allBookedDays = $allBookedDays->flatten(1);
-        //dd($allBookedDays);
-        //$allBookedDays->all();
+       
     	return view('admin.bookings', compact('bookings', 'roomTypes', 'allBookedDays') );
     }
     public function destroy(Booking $booking){
