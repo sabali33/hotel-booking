@@ -14,7 +14,7 @@ class BookingSeeder extends Seeder
      */
     public function run()
     {
-        factory(Booking::class, 5)->create()->each(function ($booking){
+        factory(Booking::class, 10)->create()->each(function ($booking){
         	$range = range(2, 5);
             $id = array_rand($range, 1) + 1;
             //dd(Customer::find($id), $id);
