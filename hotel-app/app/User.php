@@ -49,4 +49,7 @@ class User extends Authenticatable
             ]);
         });
     }*/
+    public function isAdmin(){
+        return intval($this->id) === 1;
+    }
 }
