@@ -21,7 +21,7 @@ class CreateSettingsTable extends Migration
             $table->string('country');
             $table->string('zipcode')->nullable();
             $table->string('state')->nullable();
-            $table->integer('phone')->nullable();
+            $table->string('phone', 20)->nullable();
             $table->string('email');
             $table->string('image')->nullable();
             $table->timestamps();
