@@ -19,8 +19,8 @@ class CreateBookingsTable extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->index('room_id');
             $table->index('customer_id');
-            $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
             $table->timestamps();
         });
     }
