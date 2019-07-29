@@ -16,7 +16,7 @@
             @endif
 
             <div class="user-profile">
-                
+                {{ $customer }}
                 Welcome to your profile
             </div>
         </main>

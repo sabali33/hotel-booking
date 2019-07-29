@@ -31,7 +31,7 @@
                 
             </li>
             <li class="nav-item list-group-item">
-                <a href="/profile">Profile</a>
+                <a href="/customer/profile">Profile</a>
                 
             </li>
         </ul>

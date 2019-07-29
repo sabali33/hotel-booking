@@ -103,10 +103,10 @@ class CustomerController extends Controller
         //return $customer;
 
     }
-    public function profile( Customer $customer ){
-        
-        $this->authorize( 'editProfile', $customer);
+    public function profile(){
 
+        //$this->authorize( 'editProfile', $customer);
+        $customer = auth()->user();
         return view('admin.profile', compact('customer'));
     }
 }
