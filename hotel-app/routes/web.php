@@ -65,6 +65,4 @@ Route::get('/setting/{settings}/edit', 'SettingsController@edit');
 Route::put('/setting/{settings}', 'SettingsController@update');
 
 Route::get('/countries', 'CountriesController@index');
-Route::get('/profile', function(){
-	return view('admin.profile');
-});
+Route::get('/profile/{customer}', 'CustomerController@profile');

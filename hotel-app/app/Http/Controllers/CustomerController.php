@@ -28,6 +28,7 @@ class CustomerController extends Controller
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		$data = curl_exec($ch);
 		curl_close($ch);
+
     	return json_decode( $data );
     }
     public function update(Customer $customer){
@@ -101,5 +102,11 @@ class CustomerController extends Controller
         
         //return $customer;
 
+    }
+    public function profile( Customer $customer ){
+        
+        $this->authorize( 'editProfile', $customer);
+
+        return view('admin.profile', compact('customer'));
     }
 }

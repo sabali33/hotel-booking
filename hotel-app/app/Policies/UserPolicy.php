@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\User;
 use App\Room;
+use App\Customer;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
@@ -91,5 +92,8 @@ class UserPolicy
     public function forceDelete(User $user, User $model)
     {
         //
+    }
+    public function editProfile(User $user, Customer $model){
+        return($user->id == $model->user_id);
     }
 }
