@@ -35,6 +35,20 @@ Vue.component('new-customer-form', require('./components/NewCustomerForm.vue').d
 Vue.component('home-calendar', require('./components/BookingCalendar.vue').default);
 Vue.component('room-listing', require('./components/RoomListing.vue').default);
 Vue.component('bookings-calendar-view', require('./components/BookingsCalendarView.vue').default);
+Vue.component(
+    'passport-clients',
+    require('../assets/js/components/passport/Clients.vue').default
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('../assets/js/components/passport/AuthorizedClients.vue').default
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('../assets/js/components/passport/PersonalAccessTokens.vue').default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

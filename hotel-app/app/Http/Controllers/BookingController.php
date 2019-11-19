@@ -17,7 +17,7 @@ class BookingController extends Controller
 
 {
     public function __construct(){
-        $this->middleware('auth');
+       // $this->middleware('auth');
     }
     public function index(){
     	$roomTypes = RoomType::all();
@@ -164,5 +164,9 @@ class BookingController extends Controller
         ];
         
 
+    }
+    public function getAll(){
+        $all_booking = Booking::paginate(10);
+        return $all_booking;
     }
 }

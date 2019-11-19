@@ -53,6 +53,7 @@ Route::get('/api/prices', 'PriceManagerController@json' );
 Route::get('/api/capacities', 'RoomCapacityController@json' );
 Route::get('/api/room/{room}', 'RoomController@json');
 Route::get('/api/rooms', 'RoomController@getAll');
+Route::get('/api/bookings', 'BookingController@getAll');
 
 Route::post('/new-customer', 'CustomerController@create');
 Route::put('/customer/{customer}', 'CustomerController@update')->name('customer.update');
@@ -66,3 +67,4 @@ Route::put('/setting/{settings}', 'SettingsController@update');
 
 Route::get('/countries', 'CountriesController@index');
 Route::get('/customer/profile', 'CustomerController@profile');
+Route::get('/api-clients', 'APIclientsController@index');
